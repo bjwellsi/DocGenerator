@@ -1,0 +1,22 @@
+{
+  "name": "docgenerator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjwellsi/DocGenerator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bjwellsi/DocGenerator/issues"
+  },
+  "homepage": "https://github.com/bjwellsi/DocGenerator#readme",
+  "description": "",
+  "dependencies": {
+    "commander": "^14.0.0"
+  }
+}
