@@ -18,6 +18,7 @@
   "homepage": "https://github.com/bjwellsi/DocGenerator#readme",
   "description": "",
   "dependencies": {
+    "archiver": "^7.0.1",
     "commander": "^14.0.0"
   }
 }

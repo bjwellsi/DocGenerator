@@ -1,3 +1,4 @@
+import { read } from "fs";
 import { writeFile, appendFile, readFile, stat, readdir } from "fs/promises";
 
 let discoverDir = async (dir) => {
@@ -135,31 +136,22 @@ let populateDocFromArray = async (baseDir, docDefinitionArray, docFile) => {
   await writeFile(docFileFullPath, "", "utf8");
   for (let item of docDefinitionArray) {
     //add the object's note
-    await appendFile(
-      docFileFullPath,
-      "todo - handle object notes - " + item.rule.notes + "\n",
-      "utf8",
-    );
+    let contentToAppend = "";
+    contentToAppend += item.rule.notes + "\n";
     //handle according to the rules
     if (item.contents.type == "folder" && item.rule.handling == "compress") {
-      let todo = "todo, folder compress rule - ";
-      console.log(todo);
-      await appendFile(docFileFullPath, todo + item.contents.fullPath, "utf8");
+      contentToAppend +=
+        "todo - folder compress rule - " + item.contents.fullPath;
     } else if (item.contents.type == "file" && item.rule.handling == "embed") {
-      let todo = "todo, file embed rule - ";
-      console.log(todo);
       let fileContent = await readFile(item.contents.fullPath, "utf8");
-      await appendFile(
-        docFileFullPath,
-        todo + item.contents.fullPath + "\n" + fileContent,
-        "utf8",
-      );
+      contentToAppend += fileContent;
     } else if (item.contents.type == "file" && item.rule.handling == "attach") {
-      let todo = "todo, file attach rule - ";
-      console.log(todo);
-      await appendFile(docFileFullPath, todo + item.contents.fullPath, "utf8");
+      contentToAppend +=
+        "todo - file attach rule - \n" + item.contents.fullPath;
     }
-    await appendFile(docFileFullPath, "\n\n", "utf8");
+    contentToAppend += "\n\n";
+    console.log(contentToAppend);
+    await appendFile(docFileFullPath, contentToAppend, "utf8");
   }
   //add footer
   await appendFile(docFileFullPath, "", "utf8");
